@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    
+    <h1>Cart <span data-th-text="${cartid}"></span></h1>
+    <h1>Name: <span data-th-text="${username}"></span></h1>
+
+    <form method="post" action="/login/addItem">
+        <input type="hidden" name="cartid" data-th-value="${cartid}">
+        <table>
+            <tr>
+                <td>Name: </td>
+                <td><input type="text" name="item" required></td>
+            </tr>
+            <tr>
+                <td>Quantity: </td>
+                <td><input type="number" min="1" name="quantity" required></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit">Add</button></td>
+            </tr>
+        </table>
+    </form>
+
+    <hr>
+
+    <h1>Cart Information</h1>
+
+    <div data-th-if="${#sets.isEmpty(items)}">
+        <h3>Your cart is empty</h3>
+    </div>
+
+    <div data-th-unless="${#sets.isEmpty(items)}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Item name</th>
+                    <th>Item quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-th-each="i : ${items}">
+                    <td><span data-th-text="${#strings.substringBefore(i, ':')}"></span></td>
+                    <td><span data-th-text="${#strings.substringAfter(i, ':')}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    
+    <h3><a href="/login"> Back </a></h3>
+    <h3><a href="/saveCart"> Save </a></h3>
+
+    
+</body>
+</html>

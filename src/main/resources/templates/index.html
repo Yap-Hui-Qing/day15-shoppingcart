@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <!--
+    Landing page for user to login
+    -->
+
+    <h1> Hello, please login to your account! </h1>
+
+    <form method="post" action="/login" data-th-object="${user}">
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td>
+                    <input type="text" name="username">
+                </td>
+                <td>
+                    <span data-th-if="${#fields.hasErrors('username')}"
+                        data-th-errors="*{username}" class="error"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit"> Go </button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    
+</body>
+</html>

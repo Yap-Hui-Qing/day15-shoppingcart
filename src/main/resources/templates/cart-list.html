@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart List</title>
+</head>
+<body>
+    
+    <h1>Hello, <span data-th-text="${username}"></span>! Welcome to your shopping cart </h1>
+
+    <div data-th-if="${#sets.isEmpty(carts)}">
+        <h2> You do not have any cart </h2>
+    </div>
+
+    <div data-th-unless="${#sets.isEmpty(carts)}">
+        <h2>List of shopping carts</h2>
+        <ol>
+            <li data-th-each="c, status:${carts}">
+                <a data-th-href="@{/login/{cartid}(cartid=${#strings.substringBefore(c, ':')},
+                    format=${status.index})}">
+                    <h4>Cart <code data-th-text="${#strings.substringBefore(c, ':')}"></code> 
+                        with <code data-th-text="${#strings.substringAfter(c, ':')}"></code> items</h4>
+                </a>
+            </li>
+        </ol>
+    </div>
+
+    <div>
+        <form method="post" action="/login/addCart">
+            <table>
+                <tr>
+                    <td></td>
+                    <td><button type="submit"> New Cart </button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit" formmethod="get" formaction="/logout"> Logout </button></td>
+                </tr>
+            </table>
+    </div>
+    
+
+</body>
+</html>
